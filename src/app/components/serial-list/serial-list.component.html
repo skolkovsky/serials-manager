@@ -1,0 +1,14 @@
+<p>serial-list works!</p>
+<div class="serial-list-container">
+  <table>
+    <tr>
+      <th *ngFor="let columnTitle of titles">{{ columnTitle }}</th>
+    </tr>
+    <tr *ngFor="let serial of serials">
+      <th><app-serial-item [serial]="serial"> </app-serial-item></th>
+      <th>{{serial.serialName}}</th>
+      <th>{{serial.network}}</th>
+      <th>{{serial.premiere}}</th>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,15 @@
+.serial-item-container {
+  display: flex;
+
+  &__name {
+    flex: 0 0 100%;
+    padding: 2px;
+  }
+
+  &__labels {
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4px;
+  }
+}

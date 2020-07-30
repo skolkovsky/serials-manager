@@ -1,6 +1,37 @@
 .serial-list-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);    
+	width: 500px;
+	position: absolute;
+	margin-top: 300px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	.table-header {
+		background-color: blueviolet;
+		color: white;
+
+		&__name {
+            display: inline-flex;
+            width: 80%;
+			justify-content: space-between;
+		}
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		width: 100%;
+		border: 1px solid #ddd;
+	}
+
+	th,
+	td {
+		text-align: center;
+		padding: 8px;
+	}
+
+	th:first-child,
+	td:first-child {
+		text-align: left;
+	}
 }

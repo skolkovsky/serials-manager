@@ -6,11 +6,8 @@ import { SerialsService } from './services/serials.service';
 	templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-	constructor(private serialsService: SerialsService) {}
+	constructor() {}
 
 	ngOnInit(): void {
-		this.serialsService.getSerials(5).subscribe((serials) => {
-			console.log(serials);
-		});
 	}
 }

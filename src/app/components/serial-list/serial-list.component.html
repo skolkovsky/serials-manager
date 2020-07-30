@@ -1,14 +1,16 @@
-<p>serial-list works!</p>
-<div class="serial-list-container">
-  <table>
-    <tr>
-      <th *ngFor="let columnTitle of titles">{{ columnTitle }}</th>
-    </tr>
-    <tr *ngFor="let serial of serials">
-      <th><app-serial-item [serial]="serial"> </app-serial-item></th>
-      <th>{{serial.serialName}}</th>
-      <th>{{serial.network}}</th>
-      <th>{{serial.premiere}}</th>
-    </tr>
-  </table>
+<div class="serial-list-container" *ngIf="serials">
+	<table>
+		<tr class="table-header">
+			<th *ngFor="let columnTitle of titles" [ngClass]="columnTitle === 'name' ? 'table-header__name' : ''">
+				{{ columnTitle }}
+				<span *ngIf="columnTitle === 'name'"><i class="fa fa-angle-down" style="font-size: 24px;"></i></span>
+			</th>
+		</tr>
+		<tr *ngFor="let serial of serials">
+			<th><app-serial-item [serial]="serial"></app-serial-item></th>
+			<th>{{ serial.season }}</th>
+			<th>{{ serial.network }}</th>
+			<th>{{ serial.primiere }}</th>
+		</tr>
+	</table>
 </div>

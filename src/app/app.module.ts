@@ -24,7 +24,9 @@ import { SerialsEffects } from './store/serials.effects';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot(serialsReducer),
+    StoreModule.forRoot({
+      serialsState: serialsReducer
+    }),
     EffectsModule.forRoot([SerialsEffects]),
     HttpClientModule,
   ],

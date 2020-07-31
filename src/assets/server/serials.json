@@ -4,49 +4,49 @@
       "serialName": "Game of Thrones",
       "network": "HBO",
       "season": 3,
-      "genre": ["adenture", "fantasy"],
+      "genres": ["adenture", "fantasy"],
       "primiere": "20/03/2019"
     },
     {
       "serialName": "Chernobyl",
       "network": "HBO",
       "season": 1,
-      "genre": ["horror", "detective", "thriller"],
+      "genres": ["horror", "detective", "thriller"],
       "primiere": "13/01/2020"
     },
     {
       "serialName": "Serial Horror BLA",
       "network": "NETFLIX",
       "season": 2,
-      "genre": ["horror", "dark comedy"],
+      "genres": ["horror", "dark comedy"],
       "primiere": "10/04/2019"
     },
     {
       "serialName": "Serial Comedy NOKA",
       "network": "NETFLIX",
       "season": 4,
-      "genre": ["comedy"],
+      "genres": ["comedy"],
       "primiere": "13/05/2019"
     },
     {
       "serialName": "Serial Drama JOJI",
       "network": "HBO",
       "season": 5,
-      "genre": ["drama", "comedy"],
+      "genres": ["drama", "comedy"],
       "primiere": "01/03/2019"
     },
     {
       "serialName": "Serial Adventure",
       "network": "NETFLIX",
       "season": 1,
-      "genre": ["adventure", "dark comedy"],
+      "genres": ["adventure", "dark comedy"],
       "primiere": "29/06/2019"
     },
     {
       "serialName": "Serial Crime Find Killer",
       "network": "NETFLIX",
       "season": 2,
-      "genre": ["horror", "crime"],
+      "genres": ["horror", "crime"],
       "primiere": "23/02/2020"
     }
   ]

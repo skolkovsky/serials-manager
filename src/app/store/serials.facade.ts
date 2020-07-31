@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GetSerialsAction } from './serials.actions';
+import { GetSerialsAction, FilterSerialsByGenreAction } from './serials.actions';
 import { Observable } from 'rxjs';
 import { selectSerialsList } from './serials.selector';
 import { SerialsState, AppState } from './app.state';
@@ -16,5 +16,9 @@ export class SerialsFacade {
 
 	public loadSerialsList(): void {
 		this.store.dispatch(new GetSerialsAction({ pageNumber: 1, countSerials: 5 }));
+	}
+
+	public loadSerialsByGenre(genre: string): void {
+		this.store.dispatch(new FilterSerialsByGenreAction({ genre }));
 	}
 }

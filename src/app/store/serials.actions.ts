@@ -12,11 +12,12 @@ export enum SerialsActionTypes {
 
 export interface SerialsActionPayload {
 	countSerials?: number;
-	countPages?:number;
+	countPages?: number;
 	pageNumber?: number;
 	searchName?: string;
 	networkType?: string;
 	premiere?: Date;
+	genre?: string;
 	serials?: Array<Serial>;
 }
 

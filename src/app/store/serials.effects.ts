@@ -19,17 +19,18 @@ export class SerialsEffects {
 		ofType(SerialsActionTypes.GET_SERIALS),
 		concatMap((action: SerialsActionType) => {
 			let serials$: Observable<SerialsActionType>;
-			if (action.payload.genre) {
-				serials$ = this.serialsService.getSerials(Constants.DEFAULT_COUNT_SERIALS_ON_PAGE, Constants.DEFAULT_PAGE_NUMBER, action.payload.genre).pipe(
+			serials$ = this.serialsService
+				.getSerials(
+					Constants.DEFAULT_COUNT_SERIALS_ON_PAGE,
+					Constants.DEFAULT_PAGE_NUMBER,
+					action.payload.genre || Constants.DEFAULT_GENRE_SERIALS,
+					action.payload.premiere
+				)
+				.pipe(
 					map((response: any) => this.createGetSerialsSuccessAction(response, action)),
 					catchError(() => of(new GetSerialsFailedAction({})))
 				);
-			} else {
-				serials$ = this.serialsService.getSerials(action.payload.countSerials, action.payload.pageNumber).pipe(
-					map((response: any) => this.createGetSerialsSuccessAction(response, action)),
-					catchError(() => of(new GetSerialsFailedAction({})))
-				);
-			}
+
 			return serials$;
 		})
 	);
@@ -39,11 +40,18 @@ export class SerialsEffects {
 		concatMap((action: SerialsActionType) => of(new GetSerialsAction({ genre: action.payload.genre })))
 	);
 
+	@Effect()
+	public loadSerialsByPremiereYear$: Actions<Action> = this.actions$.pipe(
+		ofType(SerialsActionTypes.FILTER_SERIALS_BY_PREMIERE),
+		concatMap((action: SerialsActionType) => of(new GetSerialsAction({ premiere: action.payload.premiere })))
+	);
+
 	private createGetSerialsSuccessAction(response: any, action: SerialsActionType): SerialsActionType {
 		return new GetSerialsSuccessAction({
 			serials: response.serials,
 			countSerials: action.payload.countSerials,
 			pageNumber: action.payload.pageNumber,
+			premiereYears: response.premiereYears,
 		});
 	}
 }

@@ -16,9 +16,10 @@ export interface SerialsActionPayload {
 	pageNumber?: number;
 	searchName?: string;
 	networkType?: string;
-	premiere?: Date;
+	premiere?: number;
 	genre?: string;
 	serials?: Array<Serial>;
+	premiereYears?: Array<number>;
 }
 
 export class GetSerialsAction implements Action {

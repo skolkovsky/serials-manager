@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { GetSerialsAction, FilterSerialsByGenreAction } from './serials.actions';
+import { GetSerialsAction, FilterSerialsByGenreAction, FilterSerialsByPremiereAction } from './serials.actions';
 import { Observable } from 'rxjs';
-import { selectSerialsList } from './serials.selector';
+import { selectSerialsList, selectPremiereYearList } from './serials.selector';
 import { SerialsState, AppState } from './app.state';
 import { Serial } from '../models/serial.model';
 
@@ -11,6 +11,7 @@ import { Serial } from '../models/serial.model';
 })
 export class SerialsFacade {
 	public serials$: Observable<Array<Serial>> = this.store.pipe(select(selectSerialsList));
+	public premiereYears$: Observable<Array<number>> = this.store.pipe(select(selectPremiereYearList));
 
 	constructor(private store: Store<AppState>) {}
 
@@ -20,5 +21,9 @@ export class SerialsFacade {
 
 	public loadSerialsByGenre(genre: string): void {
 		this.store.dispatch(new FilterSerialsByGenreAction({ genre }));
+	}
+
+	public loadSerialsByPremiereYear(year: number): void {
+		this.store.dispatch(new FilterSerialsByPremiereAction({ premiere: year }));
 	}
 }

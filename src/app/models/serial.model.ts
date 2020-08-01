@@ -3,5 +3,5 @@ export interface Serial {
     season: number;
     genres: Array<string>;
     network: string;
-    primiere: Date;
+    premiere: Date;
 }

@@ -1,5 +1,6 @@
 <div class="controls-container">
     <app-select [items]="serialGenres" (selectValueChange)="selectGenre($event)"></app-select>
+    <app-select [items]="premiereYears" (selectValueChange)="selectYear($event)"></app-select>
 </div>
 
 <app-serial-list></app-serial-list>

@@ -6,6 +6,7 @@ const initialState: SerialsState = {
 	countPages: 0,
 	serials: new Array(),
 	countSerials: 5,
+	premiereYears: new Array()
 };
 
 export function serialsReducer(state: SerialsState = initialState, action: SerialsActionType): SerialsState {
@@ -20,6 +21,7 @@ export function serialsReducer(state: SerialsState = initialState, action: Seria
 			return {
 				...state,
 				serials: action.payload.serials,
+				premiereYears: action.payload.premiereYears
       };
     case SerialsActionTypes.GET_SERIALS_FAILED: 
       return {

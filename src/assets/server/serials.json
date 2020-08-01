@@ -1,53 +1,60 @@
 {
-  "serials": [
-    {
-      "serialName": "Game of Thrones",
-      "network": "HBO",
-      "season": 3,
-      "genres": ["adenture", "fantasy"],
-      "primiere": "20/03/2019"
-    },
-    {
-      "serialName": "Chernobyl",
-      "network": "HBO",
-      "season": 1,
-      "genres": ["horror", "detective", "thriller"],
-      "primiere": "13/01/2020"
-    },
-    {
-      "serialName": "Serial Horror BLA",
-      "network": "NETFLIX",
-      "season": 2,
-      "genres": ["horror", "dark comedy"],
-      "primiere": "10/04/2019"
-    },
-    {
-      "serialName": "Serial Comedy NOKA",
-      "network": "NETFLIX",
-      "season": 4,
-      "genres": ["comedy"],
-      "primiere": "13/05/2019"
-    },
-    {
-      "serialName": "Serial Drama JOJI",
-      "network": "HBO",
-      "season": 5,
-      "genres": ["drama", "comedy"],
-      "primiere": "01/03/2019"
-    },
-    {
-      "serialName": "Serial Adventure",
-      "network": "NETFLIX",
-      "season": 1,
-      "genres": ["adventure", "dark comedy"],
-      "primiere": "29/06/2019"
-    },
-    {
-      "serialName": "Serial Crime Find Killer",
-      "network": "NETFLIX",
-      "season": 2,
-      "genres": ["horror", "crime"],
-      "primiere": "23/02/2020"
-    }
-  ]
+	"serials": [
+		{
+			"serialName": "Game of Thrones",
+			"network": "HBO",
+			"season": 3,
+			"genres": ["adenture", "fantasy"],
+      "premiere": "20/03/2019",
+      "premiereYear": 2019
+		},
+		{
+			"serialName": "Chernobyl",
+			"network": "HBO",
+			"season": 1,
+			"genres": ["horror", "detective", "thriller"],
+      "premiere": "13/01/2020",
+      "premiereYear": 2020
+		},
+		{
+			"serialName": "Serial Horror BLA",
+			"network": "NETFLIX",
+			"season": 2,
+			"genres": ["horror", "dark comedy"],
+			"premiere": "10/04/2019",
+			"premiereYear": 2019
+		},
+		{
+			"serialName": "Serial Comedy NOKA",
+			"network": "NETFLIX",
+			"season": 4,
+			"genres": ["comedy"],
+			"premiere": "13/05/2019",
+			"premiereYear": 2019
+		},
+		{
+			"serialName": "Serial Drama JOJI",
+			"network": "HBO",
+			"season": 5,
+			"genres": ["drama", "comedy"],
+			"premiere": "01/03/2019",
+			"premiereYear": 2019
+		},
+		{
+			"serialName": "Serial Adventure",
+			"network": "NETFLIX",
+			"season": 1,
+			"genres": ["adventure", "dark comedy"],
+			"premiere": "29/06/2019",
+			"premiereYear": 2019
+		},
+		{
+			"serialName": "Serial Crime Find Killer",
+			"network": "NETFLIX",
+			"season": 2,
+			"genres": ["horror", "crime"],
+			"premiere": "23/02/2020",
+			"premiereYear": 2020
+		}
+	]
 }

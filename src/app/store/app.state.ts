@@ -9,4 +9,5 @@ export interface SerialsState {
   countPages: number;
   serials: Array<Serial>;
   countSerials: number;
+  premiereYears: Array<number>;
 }

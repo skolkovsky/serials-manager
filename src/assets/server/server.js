@@ -4,33 +4,29 @@ const app = express();
 const port = 3000;
 const sortedSerialByCountOnPage = {};
 
-function proccessSerials(countSerialsOnPage, pageNumber = 1, serials, genre, premiere) {
-	const serialsLength = serials.length;
-	if (serialsLength < countSerialsOnPage) {
-		return {
-			countPages: 1,
-			serials,
-		};
-	} else {
+const proccessSerials = (countSerialsOnPage, pageNumber = 1, serials, genre, premiere) => {
+	let sortedAndFilteredSerials = Object.assign([], serials);
+	const premiereYears = gettingPremiereYears(serials);
+	if (genre || premiere) {
 		const serialsFilteredByGenre = !!genre ? filterSerialsByGenre(serials, genre) : serials;
 		const serialsFilteredByPremiere = !!premiere ? filterSerialsByPremiere(serialsFilteredByGenre, premiere) : serialsFilteredByGenre;
-		const serialsLength = serialsFilteredByPremiere.length;
-		const serialsPartByCountOnPage = serialsFilteredByPremiere.filter((value, index) => index < countSerialsOnPage);
-		const countPages = calculateCountPages(countSerialsOnPage, serialsLength);
-		return {
-			countPages,
-			serials: serialsPartByCountOnPage,
-			premiereYears: gettingPremiereYears(serialsPartByCountOnPage),
-		};
+		sortedAndFilteredSerials = serialsFilteredByPremiere;
 	}
-}
+	separateSerialsByPageNumber(sortedAndFilteredSerials, countSerialsOnPage);
+	const countPages = Object.keys(sortedSerialByCountOnPage).length;
+	return {
+		countPages,
+		premiereYears,
+		serials: sortedSerialByCountOnPage[pageNumber],
+	};
+};
 
 const separateSerialsByPageNumber = (serials, countSerialsOnPage) => {
 	let sourceSerials = Object.assign([], serials);
 	let pageNumber = 1;
 	while (sourceSerials.length) {
 		const partOfSerial = sourceSerials.splice(0, countSerialsOnPage);
-		sortedSerialByCountOnPage[pageNumber] = (partOfSerial);
+		sortedSerialByCountOnPage[pageNumber] = partOfSerial;
 		pageNumber++;
 	}
 };
@@ -59,7 +55,6 @@ app.get("/api/get/serials", (req, res) => {
 	const premiere = req.query.premiere;
 	const serials = JSON.parse(fs.readFileSync("./serials.json", "utf-8")).serials;
 	res.set("Access-Control-Allow-Origin", "*");
-	separateSerialsByPageNumber(serials, countSerialsOnPage);
 	res.send(proccessSerials(countSerialsOnPage, pageNumber, serials, genre, premiere));
 });
 

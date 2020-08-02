@@ -15,7 +15,8 @@ import { Constants } from '../constants/constants';
 export class SerialsEffects {
 	constructor(private serialsService: SerialsService, private actions$: Actions) {}
 
-	@Effect() public loadSerials$: Actions<Action> = this.actions$.pipe(
+	@Effect()
+	public loadSerials$: Actions<Action> = this.actions$.pipe(
 		ofType(SerialsActionTypes.GET_SERIALS),
 		concatMap((action: SerialsActionType) => {
 			let serials$: Observable<SerialsActionType>;
@@ -35,7 +36,8 @@ export class SerialsEffects {
 		})
 	);
 
-	@Effect() public loadSerialsByGenre$: Actions<Action> = this.actions$.pipe(
+	@Effect()
+	public loadSerialsByGenre$: Actions<Action> = this.actions$.pipe(
 		ofType(SerialsActionTypes.FILTER_SERIALS_BY_GENRE),
 		concatMap((action: SerialsActionType) => of(new GetSerialsAction({ genre: action.payload.genre })))
 	);

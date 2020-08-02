@@ -2,14 +2,9 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const port = 3000;
+const sortedSerialByCountOnPage = {};
 
-//TODO REFACTORING THIS METHOD
-/*
-* 1. Drop method on simple part
-* 2. Remove duplicate part => DRY PRINCIPLE
-*/
-
-function proccessSerials(countSerialsOnPage, pageNumber = 1, serials, genre = "all") {
+function proccessSerials(countSerialsOnPage, pageNumber = 1, serials, genre, premiere) {
 	const serialsLength = serials.length;
 	if (serialsLength < countSerialsOnPage) {
 		return {
@@ -17,31 +12,28 @@ function proccessSerials(countSerialsOnPage, pageNumber = 1, serials, genre = "a
 			serials,
 		};
 	} else {
-		//TODO 
-		/*
-		* equaling on 'all' replace on filter method
-		*/
-		if (genre !== "all") {
-			const serialsFilteredByGenre = filterSerialsByGenre(serials, genre);
-			let serialsLength = serialsFilteredByGenre.length;
-			const serialsPartByCountOnPage = serialsFilteredByGenre.filter((value, index) => index < countSerialsOnPage);
-			const countPages = calculateCountPages(countSerialsOnPage, serialsLength);
-			return {
-				countPages,
-				serials: serialsPartByCountOnPage,
-				premiereYears: gettingPremiereYears(serialsPartByCountOnPage),
-			};
-		} else {
-			const serialsPartByCountOnPage = serials.filter((value, index) => index < countSerialsOnPage);
-			const countPages = calculateCountPages(countSerialsOnPage, serialsLength);
-			return {
-				countPages,
-				serials: serialsPartByCountOnPage,
-				premiereYears: gettingPremiereYears(serialsPartByCountOnPage),
-			};
-		}
+		const serialsFilteredByGenre = !!genre ? filterSerialsByGenre(serials, genre) : serials;
+		const serialsFilteredByPremiere = !!premiere ? filterSerialsByPremiere(serialsFilteredByGenre, premiere) : serialsFilteredByGenre;
+		const serialsLength = serialsFilteredByPremiere.length;
+		const serialsPartByCountOnPage = serialsFilteredByPremiere.filter((value, index) => index < countSerialsOnPage);
+		const countPages = calculateCountPages(countSerialsOnPage, serialsLength);
+		return {
+			countPages,
+			serials: serialsPartByCountOnPage,
+			premiereYears: gettingPremiereYears(serialsPartByCountOnPage),
+		};
 	}
 }
+
+const separateSerialsByPageNumber = (serials, countSerialsOnPage) => {
+	let sourceSerials = Object.assign([], serials);
+	let pageNumber = 1;
+	while (sourceSerials.length) {
+		const partOfSerial = sourceSerials.splice(0, countSerialsOnPage);
+		sortedSerialByCountOnPage[pageNumber] = (partOfSerial);
+		pageNumber++;
+	}
+};
 
 const calculateCountPages = (countSerialsOnPage, serialsLength) => {
 	const result = serialsLength / countSerialsOnPage;
@@ -55,7 +47,7 @@ const gettingPremiereYears = (serials) => {
 	return Array.from(setPremierYears);
 };
 
-const filterSerialsByPremiere = (serials, premiere) => serials.filter((serial) => serial.premiere === premiere);
+const filterSerialsByPremiere = (serials, premiere) => serials.filter((serial) => serial.premiereYear.toString() === premiere);
 
 const filterSerialsByGenre = (serials, reqGenre) => serials.filter((serial) => serial.genres.some((genre) => genre.toLowerCase() === reqGenre.toLowerCase()));
 
@@ -67,7 +59,8 @@ app.get("/api/get/serials", (req, res) => {
 	const premiere = req.query.premiere;
 	const serials = JSON.parse(fs.readFileSync("./serials.json", "utf-8")).serials;
 	res.set("Access-Control-Allow-Origin", "*");
-	res.send(proccessSerials(countSerialsOnPage, pageNumber, serials, genre));
+	separateSerialsByPageNumber(serials, countSerialsOnPage);
+	res.send(proccessSerials(countSerialsOnPage, pageNumber, serials, genre, premiere));
 });
 
 app.listen(port, () => console.log("Server is started on port " + port));

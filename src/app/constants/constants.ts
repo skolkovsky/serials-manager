@@ -19,4 +19,5 @@ export class Constants {
 	public static readonly DEFAULT_COUNT_SERIALS_ON_PAGE: number = 5;
 	public static readonly DEFAULT_PAGE_NUMBER: number = 1;
     public static readonly DEFAULT_GENRE_SERIALS: string = 'all';
+    public static readonly ALL_VALUES_STRING: string = 'All values';
 }

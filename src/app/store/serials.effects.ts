@@ -4,9 +4,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { SerialsActionTypes, SerialsActionType, GetSerialsSuccessAction, GetSerialsFailedAction, GetSerialsAction } from './serials.actions';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
-import { Serial } from '../models/serial.model';
 import { Action } from '@ngrx/store';
-import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Constants } from '../constants/constants';
 
 @Injectable({
@@ -20,11 +18,12 @@ export class SerialsEffects {
 		ofType(SerialsActionTypes.GET_SERIALS),
 		concatMap((action: SerialsActionType) => {
 			let serials$: Observable<SerialsActionType>;
+			console.log(action.payload.genre);
 			serials$ = this.serialsService
 				.getSerials(
 					Constants.DEFAULT_COUNT_SERIALS_ON_PAGE,
 					Constants.DEFAULT_PAGE_NUMBER,
-					action.payload.genre || Constants.DEFAULT_GENRE_SERIALS,
+					action.payload.genre,
 					action.payload.premiere
 				)
 				.pipe(
@@ -49,6 +48,7 @@ export class SerialsEffects {
 	);
 
 	private createGetSerialsSuccessAction(response: any, action: SerialsActionType): SerialsActionType {
+		console.log(response);
 		return new GetSerialsSuccessAction({
 			serials: response.serials,
 			countSerials: action.payload.countSerials,

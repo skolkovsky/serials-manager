@@ -1,4 +1,5 @@
 <select class="select-container" (change)="selectItem($event.target.value)">
     <option *ngFor="let option of items" [value]="option">{{ option }}</option>
     <option *ngIf="!items">No values</option>
+    <option>All values</option>
 </select>

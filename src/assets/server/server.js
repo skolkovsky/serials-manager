@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const port = 3000;
-const sortedSerialByCountOnPage = {};
+let sortedSerialByCountOnPage = null;
 
 const proccessSerials = (countSerialsOnPage, pageNumber = 1, serials, genre, premiere) => {
 	let sortedAndFilteredSerials = Object.assign([], serials);
@@ -11,6 +11,7 @@ const proccessSerials = (countSerialsOnPage, pageNumber = 1, serials, genre, pre
 		const serialsFilteredByGenre = !!genre ? filterSerialsByGenre(serials, genre) : serials;
 		const serialsFilteredByPremiere = !!premiere ? filterSerialsByPremiere(serialsFilteredByGenre, premiere) : serialsFilteredByGenre;
 		sortedAndFilteredSerials = serialsFilteredByPremiere;
+		sortedSerialByCountOnPage = null;
 	}
 	separateSerialsByPageNumber(sortedAndFilteredSerials, countSerialsOnPage);
 	const countPages = Object.keys(sortedSerialByCountOnPage).length;
@@ -24,6 +25,7 @@ const proccessSerials = (countSerialsOnPage, pageNumber = 1, serials, genre, pre
 const separateSerialsByPageNumber = (serials, countSerialsOnPage) => {
 	let sourceSerials = Object.assign([], serials);
 	let pageNumber = 1;
+	sortedSerialByCountOnPage = {};
 	while (sourceSerials.length) {
 		const partOfSerial = sourceSerials.splice(0, countSerialsOnPage);
 		sortedSerialByCountOnPage[pageNumber] = partOfSerial;

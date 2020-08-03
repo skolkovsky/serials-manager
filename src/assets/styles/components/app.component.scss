@@ -1,0 +1,16 @@
+.app-container {
+    position: absolute;
+	margin-top: 300px;
+	top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+    
+    &.pagination-container {
+        display: flex;
+        flex-direction: row-reverse;
+
+        &__item {
+            flex: 0 0 30%;
+        }
+    }
+}

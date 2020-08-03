@@ -16,7 +16,7 @@ export interface SerialsActionPayload {
 	pageNumber?: number;
 	searchName?: string;
 	networkType?: string;
-	premiere?: number;
+	premiere?: string;
 	genre?: string;
 	serials?: Array<Serial>;
 	premiereYears?: Array<number>;
